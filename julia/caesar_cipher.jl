@@ -8,7 +8,7 @@ println("\nWhat do you want to do?")
 print("Command: ")
 decision = parse(Int8, readline())
 
-alphabet = split("abcdefghijklmnopqrstuvwxyz ", "")
+alphabet = split("abcdefghijklmnopqrstuvwxyz", "")
 
 if decision != 1 && decision != 2
     println("Invalid Command!")
@@ -18,24 +18,36 @@ elseif decision == 1
     print("Text: ")
     text = readline()
     text = split(text, "")
-    encrypted_array = []
+    encrypted_array = Int8[]
+    encrypted_text = Any[]
 
     print("Key: ")
-    key = readline()
+    key = parse(Int8,readline())
 
     for i in 1:length(text)
 
         index = findfirst(x-> x == text[i], alphabet)
 
         if text[i] == " "
-            encrypted_array.append(index)
+            append!(encrypted_text, " ")
         else
-            encrypted_array.append((index + key) % 26)
+            append!(encrypted_array, (index + key) % 26)
         end
     
     end
+
+    for i in 1:length(encrypted_array)
+        if encrypted_array[i] == 0 
+            index = 26
+        else 
+            index = i 
+        end
+
+        append!(encrypted_text, alphabet[index])
+    end
     
-    println("\nEncrypted Text: $(join(encrypted_array))")
+    println("\nEncrypted Text: $(encrypted_text)")
+    println(join(encrypted_text))
     println("Key $key")
     
 end
