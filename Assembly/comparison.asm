@@ -2,19 +2,21 @@ section .text
   global _start
 
 section .data
-  num1 dw 300
-  num2 dw 100
+  ; we use 'dd' to ensure that it fully encapsulates the eax and ebx registers
+  num1 dd 0
+  num2 dd 500
   msg1 db "Number 1 is bigger", 10
   msg2 db "Number 2 is bigger", 10
   msg3 db "The two numbers are equal", 10
 
-_start:
+_start: 
   mov eax, [num1]
-  cmp eax, [num2]
+  mov ebx, [num2]
+  cmp eax, ebx
   je .equal
-  cmp eax, [num2]
+  cmp eax, ebx
   jl .lesser
-  cmp eax, [num2]
+  cmp eax, ebx
   jg .greater
 
 .equal:
