@@ -19,7 +19,7 @@ section .bss
 
 section .data
   divisor dd 1
-  num dd 854
+  num dd 123
 
   newline db 10
 
@@ -32,7 +32,6 @@ _start:
 
   mov eax, [num]
   mov ecx, [divisor]
-  mov [current_divisor], ecx
 
   while1:
     cmp ecx, eax
@@ -41,14 +40,21 @@ _start:
     ; https://www.youtube.com/watch?v=4OP8p0owPUQ
     mov edx, 0
     mov eax, 10
-    mov ecx, [current_divisor]
+    mov ecx, [divisor]
     mul ecx
 
-    mov [current_divisor], edx
+    mov [divisor], eax
 
     jmp while1
 
   end_while1:
+  
+  mov edx, 0
+  mov eax, [divisor]     ; dividend
+  mov ecx, 10 ; divisor
+  div ecx
+
+  mov [divisor], eax
 
 
   while2:
@@ -69,7 +75,7 @@ _start:
     ; https://stackoverflow.com/questions/45506439/division-of-two-numbers-in-nasm
     mov edx, 0 
     mov eax, [num]     ; dividend
-    mov ecx, [current_divisor] ; divisor
+    mov ecx, [divisor] ; divisor
     div ecx
 
     mov [num], edx
@@ -84,11 +90,11 @@ _start:
 
     ; divide the divisor by 10
     mov edx, 0 
-    mov eax, [current_divisor] ; dividend
+    mov eax, [divisor] ; dividend
     mov ecx, 10                ; divisor
     div ecx
 
-    mov [current_divisor], eax ; update the value of current_divisor
+    mov [divisor], eax ; update the value of current_divisor
 
     jmp while2
   
