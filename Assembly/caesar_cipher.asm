@@ -21,7 +21,7 @@ _start:
     mov ebx, [index]
     mov eax, [message + ebx]  
 
-    cmp eax, ' '
+    cmp al, 32
     je skip
 
     add eax, [key]    ; add encryption key
