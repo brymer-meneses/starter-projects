@@ -17,6 +17,7 @@ fn main() {
     bar.set_style(indicatif::ProgressStyle::default_bar()
     .template("[{elapsed_precise}] {bar:40.cyan/blue} {pos:>7}/{len:7} {Approximating..}")
     .progress_chars("#987654321-"));
+
     while i < iterations {
         i += 1;
         bar.inc(1);
@@ -28,9 +29,8 @@ fn main() {
         if distance < 1.0 {
             total_inside_points += 1;
         }
-
-       
     }
+
     bar.finish();
     let approx_pi = 4.0*(total_inside_points as f64/iterations as f64);
 
