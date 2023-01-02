@@ -9,3 +9,6 @@ run: compile
 	@echo "Running executable.."
 	@./build/$(filename).out
 	
+debug: compile
+	gdb ./build/$(filename).out
+
